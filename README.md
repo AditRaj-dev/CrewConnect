@@ -7,6 +7,8 @@
 > **Connect, Sync, and Hang Out with Your Crew**
 > An integrated platform and mobile app for university students to synchronize EMS timetables, share schedules, and detect real-time availability across their friend circles.
 
+**🌐 Live Web App:** [crew-connect-prod.vercel.app/dashboard](https://crew-connect-prod.vercel.app/dashboard)
+
 ![Demo GIF Placeholder](./docs/assets/demo.gif)
 
 ## � Overview
