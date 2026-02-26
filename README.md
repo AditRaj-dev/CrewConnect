@@ -40,10 +40,10 @@ Refer to [`docs/architecture.md`](./docs/architecture.md) for an in-depth system
 
 ## � Interface Preview
 
-![Web Interface Placeholder](./docs/assets/web-mock.png)
+![Web Interface Preview](./docs/assets/web-mock.jpeg)
 *Web Dashboard: Glassmorphic Hub*
 
-![Mobile App Placeholder](./docs/assets/mobile-mock.png)
+![Mobile App Preview](./docs/assets/mobile-mock.jpeg)
 *Mobile App: Offline-First Schedule Viewer*
 
 ## 🛠️ Technology Stack
