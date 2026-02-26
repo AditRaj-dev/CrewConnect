@@ -1,91 +1,74 @@
-# 🚀 CrewConnect
+# Crew Connect
 
-<div align="center">
-  <h3>Connect, Sync, and Hang Out with Your Crew!</h3>
-  <p>A comprehensive platform to sync your EMS timetables, track friend availability, and manage your circles effortlessly across Web and Mobile.</p>
-</div>
+![Version](https://img.shields.io/badge/version-1.0.0--beta-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Platform](https://img.shields.io/badge/platform-Web%20%7C%20Android-lightgrey.svg)
 
----
+> **Connect, Sync, and Hang Out with Your Crew**
+> An integrated platform and mobile app for university students to synchronize EMS timetables, share schedules, and detect real-time availability across their friend circles.
 
-## 📖 Overview
+![Demo GIF Placeholder](./docs/assets/demo.gif)
 
-**CrewConnect** is an integrated ecosystem designed for students to synchronize their EMS timetables, share their schedules, and easily find out when their friends are "In Class", "On Break", or free to hang out. With a sleek glassmorphism UI, offline-first mobile capabilities, and a powerful Node.js backend, keeping up with your crew has never been this seamless.
+## � Overview
 
-## ✨ Key Features
+Crew Connect is an engineered utility designed to solve the daily student friction of coordinating free time. By fully automating the ingestion of complex EMS timetables using a custom DOM Parser bookmarklet, the system dynamically calculates when users are "In Class", "On Break", or entirely free.
 
-- **📅 EMS Timetable Integration**: Use our custom **EMS Bookmarklet** to securely extract your weekly timetable and import it directly into CrewConnect with a single click.
-- **🟢 Real-Time Friend Availability**: Instantly check if your friends are *In Class*, *On Break*, or *Quick Break* based on their synced schedules.
-- **🫂 Circle Management**: Organize friends into different "Crews" or "Circles" with custom avatars and detailed member cards.
-- **🎨 Stunning UI/UX**: Built with modern aesthetics featuring refractive glassmorphism, dynamic gradients, and smooth micro-animations.
-- **📱 Offline Capabilities**: Persistent offline caching ensures you can view your crew's status even when your connect drops.
-- **🔐 Secure Authentication**: Robust JWT-based authentication system seamlessly connected across the Flutter mobile app and React web client.
-- **🧑‍🎨 Avatar Builder**: Fully customizable user avatars with a dedicated modal builder.
+This project showcases a robust, multi-client system architecture comprising a Node.js backend proxy, a React-based web dashboard with hyper-realistic glassmorphism, and a performant cross-platform Flutter application prioritizing offline-first capabilities. 
 
-## 🛠️ Tech Stack
+## ✨ Feature Highlights
 
-### Mobile App (iOS & Android)
-- **Framework**: Flutter / Dart
-- **Key Libraries**: HTTP, Dio, Shared Preferences (for offline caching)
-- **UI/UX**: Custom themed widgets, smooth transitions.
+- **Username-Based Authentication**: Stateless JWT auth flow maximizing privacy and reducing boarding friction (no email/OAuth required).
+- **Automated Timetable Upsert**: Injects a custom JS parser into the EMS webview/DOM to extract full-week schedules reliably.
+- **Overlap Validation Engine**: Server-side conflict detection to prevent duplicate class entries and corrupt schedule states.
+- **Real-Time Status Computation**: Reactive user status engine displaying "In Class", "On Break", or "Free" based on the unified master schedule.
+- **Circle Management**: Create, join (via secure invite codes), and administer private friend groups (Crews) with Creator/Member governance.
+- **Offline Mode Persistence**: The Flutter client locally caches all timetable and Circle data to ensure full visibility even on spotty campus Wi-Fi.
+- **Advanced Glass UI**: Deep space aesthetic featuring complex multi-layered refractive frosted glass, reactive blurs, and organic mesh gradients.
+- **Secure Data Cascade**: Robust account and Circle deletion workflows that maintain referential integrity.
 
-### Web Application
-- **Frontend**: React (TypeScript) / React Native Web
-- **Styling**: Vanilla CSS / Tailwind (Glassmorphism & dynamic aesthetics)
-- **Integration**: `postMessage` API for communicating with the EMS Bookmarklet.
+## 🏗️ Architecture Overview
 
-### Backend API
-- **Runtime**: Node.js
-- **Architecture**: RESTful API
-- **Features**: JWT Auth, User Data & Circle Management, Timetable Processing.
+The system operates on an isolated tier architecture:
+1. **Frontend Web Client (React/Vite)**: Optimized for fast timetable onboarding and Circle administration.
+2. **Mobile Client (Flutter)**: Optimized for daily persistent usage and offline availability.
+3. **API Layer (Node.js/Express)**: A stateless proxy enforcing business logic, overlap validation, and JWT verification.
+4. **Data Layer (MongoDB)**: Stores structured timetable matrices and relational Circle mappings.
 
-## 🚀 Getting Started
+Refer to [`docs/architecture.md`](./docs/architecture.md) for an in-depth system diagram and architectural responsibilities.
 
-### Prerequisites
-- [Flutter SDK](https://flutter.dev/docs/get-started/install) (for mobile app)
-- [Node.js](https://nodejs.org/) (for backend and web app)
-- Git
+## � Interface Preview
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/AditRaj-dev/CrewConnect.git
-cd CrewConnect
-```
+![Web Interface Placeholder](./docs/assets/web-mock.png)
+*Web Dashboard: Glassmorphic Hub*
 
-### 2. Backend Setup
-```bash
-cd backend
-npm install
-npm run dev
-```
+![Mobile App Placeholder](./docs/assets/mobile-mock.png)
+*Mobile App: Offline-First Schedule Viewer*
 
-### 3. Web App Setup
-```bash
-cd web
-npm install
-npm run start
-```
+## 🛠️ Technology Stack
 
-### 4. Mobile App Setup
-```bash
-cd mobile
-flutter pub get
-flutter run
-```
+- **Backend**: Node.js, Express.js, MongoDB, Mongoose
+- **Web**: React 18, TypeScript, Tailwind CSS v4, Vite, Radix UI
+- **Mobile**: Flutter, Dart, Provider (State), Dio (Network)
 
-## 🧩 How the EMS Bookmarklet Works
-1. Drag the CrewConnect Bookmarklet to your browser's bookmarks bar.
-2. Navigate to your EMS Portal timetable page.
-3. Click the bookmarklet. It will parse your class schedule, open the CrewConnect web app in a new tab, and securely transmit your data via `postMessage`.
-4. *Note: Ensure you are viewing a standard week without substitute classes for the most accurate import.*
+See [`docs/tech-stack.md`](./docs/tech-stack.md) for full details.
 
-## 🤝 Contributing
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+## 🔒 Security Philosophy
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Security is baked into the foundation:
+- **Strict CORS & Helmet**: Mitigating cross-site attacks and enforcing secure headers.
+- **Ownership Validation**: Backend verifies creator privileges before permitting localized destructive actions (e.g., Circle deletion).
+- **Referential Integrity**: Account deletions cleanly trigger cascading hard-deletes to avoid orphaned records.
 
-## 📄 License
-Distributed under the MIT License. See `LICENSE` for more information.
+Full security principles are detailed in [`docs/security.md`](./docs/security.md).
+
+## 🚀 Roadmap
+
+The platform is continuously evolving. Our immediate pipeline focuses on reducing database duplication through **Section-Based Timetable Normalization** and introducing push notifications for overlapping free periods.
+
+View the full breakdown in [`docs/roadmap.md`](./docs/roadmap.md).
+
+## 📄 License & Access
+
+Crew Connect is distributed under the **MIT License**. The codebase is organized as a monorepo containing both the web dashboard and mobile application source code.
+
+An Android build `app-release.apk` is available in the [Releases](https://github.com/AditRaj-dev/CrewConnect/releases) tab.
