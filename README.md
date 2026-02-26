@@ -44,15 +44,15 @@ This project showcases a robust, multi-client system architecture comprising a N
 <div align="center">
   <table>
     <tr>
-      <th align="center">💻 Web Dashboard</th>
-      <th align="center">📱 Mobile App</th>
+      <th align="center">� Mobile App</th>
+      <th align="center">� Web Dashboard</th>
     </tr>
     <tr>
-      <td align="center"><img src="./docs/assets/web-mock.jpeg" width="450" alt="Web Dashboard: Glassmorphic Hub"/></td>
-      <td align="center"><img src="./docs/assets/mobile-mock.jpeg" width="220" alt="Mobile App: Offline-First Schedule Viewer"/></td>
+      <td align="center"><img src="./docs/assets/web-mock.jpeg" width="250" alt="Mobile App: Offline-First Schedule Viewer"/></td>
+      <td align="center"><img src="./docs/assets/mobile-mock.jpeg" width="500" alt="Web Dashboard: Glassmorphic Hub"/></td>
     </tr>
   </table>
-  <p><i>Left: Glassmorphic Hub &nbsp;&nbsp;|&nbsp;&nbsp; Right: Offline-First Schedule Viewer</i></p>
+  <p><i>Left: Offline-First Schedule Viewer &nbsp;&nbsp;|&nbsp;&nbsp; Right: Glassmorphic Hub</i></p>
 </div>
 
 ## 🏗️ Architecture Overview
