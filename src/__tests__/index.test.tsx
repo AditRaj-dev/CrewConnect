@@ -12,7 +12,7 @@ jest.mock('framer-motion', () => ({
 describe('Home Page', () => {
   test('should render hero section', () => {
     render(<Home />)
-    expect(screen.getByText('Stay Connected in Real Time')).toBeInTheDocument()
+    expect(screen.getByText('Stay Connected')).toBeInTheDocument()
   })
 
   test('should render carousel section', () => {

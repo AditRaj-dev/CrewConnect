@@ -4,7 +4,9 @@ import Hero from '../Hero'
 describe('Hero Component', () => {
   test('should render headline', () => {
     render(<Hero />)
-    expect(screen.getByText('Stay Connected in Real Time')).toBeInTheDocument()
+    // Headline is split across two elements, check both parts
+    expect(screen.getByText('Stay Connected')).toBeInTheDocument()
+    expect(screen.getByText('in Real Time')).toBeInTheDocument()
   })
 
   test('should render subheadline', () => {
@@ -22,7 +24,7 @@ describe('Hero Component', () => {
 
   test('should render secondary CTA', () => {
     render(<Hero />)
-    expect(screen.getByText("See What's Inside")).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /See What's Inside/i })).toBeInTheDocument()
   })
 
   test('should have proper styling classes', () => {
