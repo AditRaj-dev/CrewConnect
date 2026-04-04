@@ -15,17 +15,22 @@ export default function StickyDownloadBar({ onDownloadClick }: StickyDownloadBar
   return (
     <div
       data-testid="sticky-bar"
-      className="sticky bottom-0 bg-white border-t border-gray-200 shadow-lg z-40"
+      className="sticky bottom-0 bg-slate-950/95 backdrop-blur border-t border-slate-800 z-40"
     >
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <div>
-          <p className="text-sm text-gray-600">Ready to join?</p>
-          <p className="text-lg font-bold text-gray-900">{config.app.name}</p>
+      <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-8 h-8 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center flex-shrink-0">
+            <span className="text-emerald-400 text-xs font-bold">CC</span>
+          </div>
+          <div className="min-w-0">
+            <p className="text-white font-semibold text-sm truncate">{config.app.name}</p>
+            <p className="text-slate-500 text-xs">{config.download.android.label}</p>
+          </div>
         </div>
 
         <button
           onClick={handleDownload}
-          className="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap"
+          className="bg-emerald-400 text-slate-950 font-bold py-2.5 px-6 rounded-xl hover:bg-emerald-300 transition-colors whitespace-nowrap text-sm flex-shrink-0"
         >
           {config.download.android.buttonText}
         </button>

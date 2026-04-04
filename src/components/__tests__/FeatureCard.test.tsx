@@ -28,6 +28,6 @@ describe('FeatureCard Component', () => {
   test('should have proper card styling', () => {
     const { container } = render(<FeatureCard feature={mockFeature} />)
     const card = container.querySelector('div')
-    expect(card).toHaveClass('rounded-lg')
+    expect(card).toHaveClass('rounded-2xl')
   })
 })

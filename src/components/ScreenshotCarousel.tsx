@@ -20,24 +20,30 @@ export default function ScreenshotCarousel() {
   }
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-          See What&apos;s Inside
-        </h2>
+    <section className="py-24 bg-slate-950">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <p className="text-emerald-400 text-sm font-semibold uppercase tracking-widest mb-3">
+            App Preview
+          </p>
+          <h2 className="text-4xl font-bold text-white">
+            See What&apos;s Inside
+          </h2>
+        </div>
 
         <div
           data-testid="carousel"
-          className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden"
+          className="relative bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden"
         >
+          {/* Slides */}
           <div className="relative w-full aspect-video">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
-                initial={{ opacity: 0, x: 100 }}
+                initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
+                exit={{ opacity: 0, x: -40 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <img
@@ -49,61 +55,46 @@ export default function ScreenshotCarousel() {
             </AnimatePresence>
           </div>
 
-          <div className="p-4 text-center bg-white border-t border-gray-200">
-            <p className="text-gray-700 font-medium">
+          {/* Caption */}
+          <div className="px-6 py-4 bg-slate-900 border-t border-slate-800 text-center">
+            <p className="text-slate-300 text-sm font-medium">
               {screenshotSlides[currentSlide].caption}
             </p>
           </div>
 
+          {/* Nav buttons */}
           <button
             onClick={prevSlide}
             aria-label="Previous slide"
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors z-10"
+            className="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-950/80 border border-slate-700 text-white rounded-full p-2.5 hover:border-emerald-500 hover:text-emerald-400 transition-colors z-10"
           >
-            <svg
-              className="w-6 h-6 text-gray-900"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
           <button
             onClick={nextSlide}
             aria-label="Next slide"
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors z-10"
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-950/80 border border-slate-700 text-white rounded-full p-2.5 hover:border-emerald-500 hover:text-emerald-400 transition-colors z-10"
           >
-            <svg
-              className="w-6 h-6 text-gray-900"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
 
+        {/* Dots */}
         <div className="flex justify-center gap-2 mt-6">
           {screenshotSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === currentSlide ? 'bg-blue-600 w-8' : 'bg-gray-300'
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                index === currentSlide
+                  ? 'bg-emerald-400 w-8'
+                  : 'bg-slate-700 w-3 hover:bg-slate-500'
               }`}
             />
           ))}

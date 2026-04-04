@@ -16,6 +16,6 @@ describe('Footer Component', () => {
   test('should have footer styling', () => {
     const { container } = render(<Footer />)
     const footer = container.querySelector('footer')
-    expect(footer).toHaveClass('bg-gray-900')
+    expect(footer).toHaveClass('bg-slate-950')
   })
 })

@@ -16,8 +16,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f9fafb;
-  color: #111827;
+  background-color: #020617; /* slate-950 */
+  color: #f8fafc;
 }
 
 @media (prefers-reduced-motion: reduce) {
