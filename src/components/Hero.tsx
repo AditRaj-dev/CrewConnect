@@ -1,3 +1,7 @@
+'use client'
+import { motion, useScroll, useTransform, type Variants } from 'framer-motion'
+import { useRef } from 'react'
+import PhoneMockup from './PhoneMockup'
 import { config } from '@/config'
 
 interface HeroProps {
@@ -5,99 +9,256 @@ interface HeroProps {
   onScrollClick?: () => void
 }
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+}
+
 export default function Hero({ onDownloadClick, onScrollClick }: HeroProps) {
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+
   return (
-    <section className="relative min-h-screen bg-slate-950 flex flex-col items-center justify-center px-6 py-24 overflow-hidden">
-      {/* Background grid */}
+    <section
+      ref={ref}
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 overflow-hidden"
+      style={{ background: '#09090b' }}
+    >
+      {/* Animated background orbs */}
+      <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none">
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.25, 0.15] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full"
+          style={{ background: 'radial-gradient(ellipse, rgba(124,58,237,0.4) 0%, transparent 70%)' }}
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.18, 0.1] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          className="absolute bottom-0 left-[-10%] w-[500px] h-[500px] rounded-full"
+          style={{ background: 'radial-gradient(ellipse, rgba(99,102,241,0.3) 0%, transparent 70%)' }}
+        />
+        <motion.div
+          animate={{ scale: [1, 1.1, 1], opacity: [0.08, 0.15, 0.08] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
+          className="absolute top-[40%] right-[-5%] w-[400px] h-[400px] rounded-full"
+          style={{ background: 'radial-gradient(ellipse, rgba(139,92,246,0.25) 0%, transparent 70%)' }}
+        />
+      </motion.div>
+
+      {/* Grid overlay */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
+            'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
+          backgroundSize: '56px 56px',
         }}
       />
 
-      {/* Radial glow — top center */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-emerald-500 opacity-[0.07] rounded-full blur-3xl pointer-events-none" />
+      <motion.div style={{ opacity: heroOpacity }} className="relative w-full max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
 
-      {/* Side glow — bottom left */}
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-500 opacity-[0.06] rounded-full blur-3xl pointer-events-none" />
-
-      <div className="relative w-full max-w-4xl mx-auto text-center">
-
-        {/* Live badge */}
-        <div className="inline-flex items-center gap-2 bg-emerald-400/10 border border-emerald-400/20 text-emerald-400 text-sm font-medium px-4 py-2 rounded-full mb-10">
-          <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-          Now live on Android
-        </div>
-
-        {/* Headline */}
-        <h1 className="text-6xl md:text-8xl font-extrabold text-white leading-[1.05] tracking-tight mb-8">
-          Stay Connected
-          <br />
-          <span className="text-emerald-400">in Real Time</span>
-        </h1>
-
-        {/* Subheadline */}
-        <p className="text-xl md:text-2xl text-slate-400 mb-14 max-w-2xl mx-auto leading-relaxed">
-          {config.hero.subheadline}
-        </p>
-
-        {/* CTA buttons — large and prominent */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
-          <button
-            onClick={onDownloadClick}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-emerald-400 text-slate-950 font-bold py-5 px-12 rounded-2xl hover:bg-emerald-300 active:scale-95 transition-all text-lg shadow-lg shadow-emerald-500/20"
+          {/* Left: Text content */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex-1 text-center lg:text-left max-w-xl"
           >
-            {/* Android icon */}
-            <svg className="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.523 15.341a.963.963 0 0 1-.962.962.963.963 0 0 1-.962-.962.963.963 0 0 1 .962-.962.963.963 0 0 1 .962.962zm-9.122 0a.963.963 0 0 1-.962.962.963.963 0 0 1-.962-.962.963.963 0 0 1 .962-.962.963.963 0 0 1 .962.962zM17.67 9.745l1.699-2.94a.354.354 0 0 0-.129-.483.354.354 0 0 0-.483.129l-1.72 2.978A10.241 10.241 0 0 0 12 8.54c-1.55 0-3.015.346-4.337.969L5.943 6.451a.354.354 0 0 0-.483-.129.354.354 0 0 0-.129.483l1.699 2.94C4.518 11.113 2.88 13.582 2.88 16.438h18.24c0-2.856-1.638-5.325-3.45-6.693z"/>
-            </svg>
-            {config.hero.primaryCta}
-          </button>
+            {/* Badge */}
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 mb-8">
+              <div
+                className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
+                style={{
+                  background: 'rgba(124,58,237,0.12)',
+                  border: '1px solid rgba(124,58,237,0.3)',
+                  color: '#a78bfa',
+                }}
+              >
+                <motion.span
+                  animate={{ opacity: [1, 0.3, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="w-2 h-2 rounded-full bg-violet-400 flex-shrink-0"
+                />
+                Live on Android — Free Download
+              </div>
+            </motion.div>
 
-          <button
-            onClick={onScrollClick}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-slate-700 text-slate-300 font-semibold py-5 px-12 rounded-2xl hover:border-slate-500 hover:text-white hover:bg-slate-900 active:scale-95 transition-all text-lg"
-          >
-            {config.hero.secondaryCta}
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Feature highlights row */}
-        <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-          {[
-            { icon: '⚡', label: 'Instant setup', sub: 'Join in 30 seconds' },
-            { icon: '🔒', label: 'Invite-only', sub: 'Your circle, your rules' },
-            { icon: '🏫', label: 'Galgotias', sub: 'Built for campus life' },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="bg-slate-900/60 border border-slate-800 rounded-2xl px-4 py-5 text-center"
+            {/* Headline */}
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-8"
             >
-              <div className="text-2xl mb-2">{item.icon}</div>
-              <p className="text-white text-sm font-semibold">{item.label}</p>
-              <p className="text-slate-500 text-xs mt-0.5">{item.sub}</p>
-            </div>
-          ))}
+              <span className="text-white">Know Where</span>
+              <br />
+              <span className="text-white">Your Crew</span>
+              <br />
+              <span className="glow-text">Is Right Now</span>
+            </motion.h1>
+
+            {/* Subheadline */}
+            <motion.p
+              variants={itemVariants}
+              className="text-lg md:text-xl mb-10 leading-relaxed"
+              style={{ color: '#a1a1aa' }}
+            >
+              CrewConnect keeps Galgotias University students in sync — live presence, timetables, and crew coordination. All in one campus-first app.
+            </motion.p>
+
+            {/* CTA buttons */}
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12">
+              <motion.button
+                onClick={onDownloadClick}
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center justify-center gap-2.5 font-bold py-4 px-8 rounded-2xl text-white text-base"
+                style={{
+                  background: 'linear-gradient(135deg, #7c3aed, #6366f1)',
+                  boxShadow: '0 0 30px rgba(124,58,237,0.4), 0 4px 16px rgba(0,0,0,0.3)',
+                }}
+              >
+                <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.523 15.341a.963.963 0 0 1-.962.962.963.963 0 0 1-.962-.962.963.963 0 0 1 .962-.962.963.963 0 0 1 .962.962zm-9.122 0a.963.963 0 0 1-.962.962.963.963 0 0 1-.962-.962.963.963 0 0 1 .962-.962.963.963 0 0 1 .962.962zM17.67 9.745l1.699-2.94a.354.354 0 0 0-.129-.483.354.354 0 0 0-.483.129l-1.72 2.978A10.241 10.241 0 0 0 12 8.54c-1.55 0-3.015.346-4.337.969L5.943 6.451a.354.354 0 0 0-.483-.129.354.354 0 0 0-.129.483l1.699 2.94C4.518 11.113 2.88 13.582 2.88 16.438h18.24c0-2.856-1.638-5.325-3.45-6.693z"/>
+                </svg>
+                {config.hero.primaryCta}
+              </motion.button>
+
+              <motion.button
+                onClick={onScrollClick}
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center justify-center gap-2 font-semibold py-4 px-8 rounded-2xl text-base transition-colors"
+                style={{
+                  border: '1px solid #27272a',
+                  color: '#a1a1aa',
+                  background: 'rgba(255,255,255,0.02)',
+                }}
+              >
+                {config.hero.secondaryCta}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </motion.button>
+            </motion.div>
+
+            {/* Stats row */}
+            <motion.div variants={itemVariants} className="grid grid-cols-3 gap-3">
+              {[
+                { value: '500+', label: 'Active Students' },
+                { value: 'Real-time', label: 'Live Presence' },
+                { value: 'Galgotias', label: 'Campus-first' },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-xl px-3 py-3 text-center"
+                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid #27272a' }}
+                >
+                  <p className="text-white font-bold text-sm">{stat.value}</p>
+                  <p className="text-xs mt-0.5" style={{ color: '#71717a' }}>{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Right: Phone mockups */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="relative flex-shrink-0 hidden lg:flex items-center justify-center"
+            style={{ width: 480, height: 500 }}
+          >
+            {/* Background glow behind phones */}
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: 'radial-gradient(ellipse 60% 60% at 50% 55%, rgba(124,58,237,0.18) 0%, transparent 70%)',
+              }}
+            />
+
+            {/* Side phone: timetable */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+              className="absolute"
+              style={{ right: 20, top: 30 }}
+            >
+              <div style={{ opacity: 0.55, transform: 'scale(0.72) rotate(8deg)', transformOrigin: 'center' }}>
+                <PhoneMockup screenContent="timetable" />
+              </div>
+            </motion.div>
+
+            {/* Side phone: crews */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+              className="absolute"
+              style={{ left: 20, top: 40 }}
+            >
+              <div style={{ opacity: 0.5, transform: 'scale(0.68) rotate(-7deg)', transformOrigin: 'center' }}>
+                <PhoneMockup screenContent="crews" />
+              </div>
+            </motion.div>
+
+            {/* Center phone: home — main hero */}
+            <motion.div
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative z-10"
+            >
+              <PhoneMockup screenContent="home" />
+            </motion.div>
+          </motion.div>
+
+          {/* Mobile: single phone */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="lg:hidden"
+          >
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <PhoneMockup screenContent="home" />
+            </motion.div>
+          </motion.div>
+
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg
-          className="w-5 h-5 text-slate-600"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </div>
+          <svg className="w-5 h-5" style={{ color: '#52525b' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
