@@ -52,24 +52,26 @@ export default function StickyDownloadBar({ onDownloadClick }: StickyDownloadBar
         </div>
 
         <div className="flex items-center gap-2 flex-shrink-0">
-          <motion.a
-            href={config.download.web.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className="font-semibold py-2.5 px-4 rounded-xl whitespace-nowrap text-sm hidden sm:inline-flex items-center gap-1.5"
-            style={{
-              border: '1px solid #27272a',
-              color: '#a1a1aa',
-              background: 'rgba(255,255,255,0.02)',
-            }}
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-            Web App
-          </motion.a>
+          {config.download?.web?.url && (
+            <motion.a
+              href={config.download.web.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              className="font-semibold py-2.5 px-4 rounded-xl whitespace-nowrap text-sm hidden sm:inline-flex items-center gap-1.5"
+              style={{
+                border: '1px solid #27272a',
+                color: '#a1a1aa',
+                background: 'rgba(255,255,255,0.02)',
+              }}
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+              Web App
+            </motion.a>
+          )}
 
           <motion.button
             onClick={handleDownload}
