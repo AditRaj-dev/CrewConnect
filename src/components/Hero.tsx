@@ -245,15 +245,11 @@ export default function Hero({ onDownloadClick }: HeroProps) {
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.button
-        type="button"
-        onClick={onScrollClick}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        style={{ cursor: onScrollClick ? 'pointer' : 'default' }}
-        aria-label="Scroll to screenshots"
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
@@ -263,7 +259,7 @@ export default function Hero({ onDownloadClick }: HeroProps) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
           </svg>
         </motion.div>
-      </motion.button>
+      </motion.div>
     </section>
   )
 }
