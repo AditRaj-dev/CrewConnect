@@ -15,7 +15,7 @@ export const config = {
     android: {
       label: 'Available Now on Android',
       buttonText: 'Download APK',
-      url: process.env.NEXT_PUBLIC_APK_DOWNLOAD_URL || 'https://github.com/AditRaj-dev/CrewConnect/releases/download/v1.0.5/CrewConnect.v1.0.5.apk',
+      url: process.env.NEXT_PUBLIC_APK_DOWNLOAD_URL || 'https://drive.google.com/uc?export=download&id=16-YHW1RCBmM7Oom7ZsoVZEaMwep2hKdV',
       minVersion: process.env.NEXT_PUBLIC_MIN_ANDROID_VERSION || '8.0',
       fileSize: '45 MB',
     },
