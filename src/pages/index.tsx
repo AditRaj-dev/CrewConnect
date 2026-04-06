@@ -17,9 +17,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero
-        onScrollClick={scrollToCarousel}
-      />
+      <Hero />
 
       <StatsSection />
 

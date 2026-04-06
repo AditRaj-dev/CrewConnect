@@ -6,7 +6,6 @@ import { config } from '@/config'
 
 interface HeroProps {
   onDownloadClick?: () => void
-  onScrollClick?: () => void
 }
 
 const containerVariants: Variants = {
@@ -26,7 +25,7 @@ const itemVariants: Variants = {
   },
 }
 
-export default function Hero({ onDownloadClick, onScrollClick }: HeroProps) {
+export default function Hero({ onDownloadClick }: HeroProps) {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
@@ -246,11 +245,15 @@ export default function Hero({ onDownloadClick, onScrollClick }: HeroProps) {
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <motion.button
+        type="button"
+        onClick={onScrollClick}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        style={{ cursor: onScrollClick ? 'pointer' : 'default' }}
+        aria-label="Scroll to screenshots"
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
@@ -260,7 +263,7 @@ export default function Hero({ onDownloadClick, onScrollClick }: HeroProps) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
           </svg>
         </motion.div>
-      </motion.div>
+      </motion.button>
     </section>
   )
 }
