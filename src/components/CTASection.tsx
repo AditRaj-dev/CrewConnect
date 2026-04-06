@@ -77,7 +77,6 @@ export default function CTASection() {
             >
               <motion.a
                 href={config.download.android.url}
-                download="CrewConnect.apk"
                 whileHover={{ scale: 1.04, y: -3 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center justify-center gap-3 font-bold py-4 px-10 rounded-2xl text-white text-lg"

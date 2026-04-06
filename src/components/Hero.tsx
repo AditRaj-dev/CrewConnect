@@ -121,7 +121,6 @@ export default function Hero() {
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12">
               <motion.a
                 href={config.download.android.url}
-                download="CrewConnect.apk"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center justify-center gap-2.5 font-bold py-4 px-8 rounded-2xl text-white text-base"

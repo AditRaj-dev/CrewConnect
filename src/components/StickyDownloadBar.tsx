@@ -64,7 +64,6 @@ export default function StickyDownloadBar() {
 
           <motion.a
             href={config.download.android.url}
-            download="CrewConnect.apk"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             className="font-bold py-2.5 px-6 rounded-xl whitespace-nowrap text-sm text-white"
