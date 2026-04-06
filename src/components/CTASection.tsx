@@ -4,20 +4,9 @@ import { useRef } from 'react'
 import { config } from '@/config'
 import PhoneMockup from './PhoneMockup'
 
-interface CTASectionProps {
-  onDownloadClick?: () => void
-}
-
-export default function CTASection({ onDownloadClick }: CTASectionProps) {
+export default function CTASection() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
-
-  const handleClick = () => {
-    if (config.download.android.url) {
-      window.open(config.download.android.url, '_blank', 'noopener,noreferrer')
-    }
-    onDownloadClick?.()
-  }
 
   return (
     <section ref={ref} className="py-24 relative overflow-hidden" style={{ background: '#09090b' }}>
@@ -86,8 +75,9 @@ export default function CTASection({ onDownloadClick }: CTASectionProps) {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <motion.button
-                onClick={handleClick}
+              <motion.a
+                href={config.download.android.url}
+                download="CrewConnect.apk"
                 whileHover={{ scale: 1.04, y: -3 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center justify-center gap-3 font-bold py-4 px-10 rounded-2xl text-white text-lg"
@@ -100,7 +90,7 @@ export default function CTASection({ onDownloadClick }: CTASectionProps) {
                   <path d="M17.523 15.341a.963.963 0 0 1-.962.962.963.963 0 0 1-.962-.962.963.963 0 0 1 .962-.962.963.963 0 0 1 .962.962zm-9.122 0a.963.963 0 0 1-.962.962.963.963 0 0 1-.962-.962.963.963 0 0 1 .962-.962.963.963 0 0 1 .962.962zM17.67 9.745l1.699-2.94a.354.354 0 0 0-.129-.483.354.354 0 0 0-.483.129l-1.72 2.978A10.241 10.241 0 0 0 12 8.54c-1.55 0-3.015.346-4.337.969L5.943 6.451a.354.354 0 0 0-.483-.129.354.354 0 0 0-.129.483l1.699 2.94C4.518 11.113 2.88 13.582 2.88 16.438h18.24c0-2.856-1.638-5.325-3.45-6.693z"/>
                 </svg>
                 Download for Android
-              </motion.button>
+              </motion.a>
 
               {config.download?.web?.url && (
                 <motion.a

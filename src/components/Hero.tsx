@@ -4,9 +4,7 @@ import { useRef } from 'react'
 import PhoneMockup from './PhoneMockup'
 import { config } from '@/config'
 
-interface HeroProps {
-  onDownloadClick?: () => void
-}
+
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -25,7 +23,7 @@ const itemVariants: Variants = {
   },
 }
 
-export default function Hero({ onDownloadClick }: HeroProps) {
+export default function Hero() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
@@ -121,8 +119,9 @@ export default function Hero({ onDownloadClick }: HeroProps) {
 
             {/* CTA buttons */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start mb-12">
-              <motion.button
-                onClick={onDownloadClick}
+              <motion.a
+                href={config.download.android.url}
+                download="CrewConnect.apk"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center justify-center gap-2.5 font-bold py-4 px-8 rounded-2xl text-white text-base"
@@ -135,7 +134,7 @@ export default function Hero({ onDownloadClick }: HeroProps) {
                   <path d="M17.523 15.341a.963.963 0 0 1-.962.962.963.963 0 0 1-.962-.962.963.963 0 0 1 .962-.962.963.963 0 0 1 .962.962zm-9.122 0a.963.963 0 0 1-.962.962.963.963 0 0 1-.962-.962.963.963 0 0 1 .962-.962.963.963 0 0 1 .962.962zM17.67 9.745l1.699-2.94a.354.354 0 0 0-.129-.483.354.354 0 0 0-.483.129l-1.72 2.978A10.241 10.241 0 0 0 12 8.54c-1.55 0-3.015.346-4.337.969L5.943 6.451a.354.354 0 0 0-.483-.129.354.354 0 0 0-.129.483l1.699 2.94C4.518 11.113 2.88 13.582 2.88 16.438h18.24c0-2.856-1.638-5.325-3.45-6.693z"/>
                 </svg>
                 {config.hero.primaryCta}
-              </motion.button>
+              </motion.a>
 
               <motion.a
                 href={config.download.web.url}

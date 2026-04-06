@@ -3,11 +3,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { config } from '@/config'
 
-interface StickyDownloadBarProps {
-  onDownloadClick?: () => void
-}
-
-export default function StickyDownloadBar({ onDownloadClick }: StickyDownloadBarProps) {
+export default function StickyDownloadBar() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -15,13 +11,6 @@ export default function StickyDownloadBar({ onDownloadClick }: StickyDownloadBar
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  const handleDownload = () => {
-    if (config.download.android.url) {
-      window.open(config.download.android.url, '_blank', 'noopener,noreferrer')
-    }
-    onDownloadClick?.()
-  }
 
   return (
     <motion.div
@@ -73,8 +62,9 @@ export default function StickyDownloadBar({ onDownloadClick }: StickyDownloadBar
             </motion.a>
           )}
 
-          <motion.button
-            onClick={handleDownload}
+          <motion.a
+            href={config.download.android.url}
+            download="CrewConnect.apk"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             className="font-bold py-2.5 px-6 rounded-xl whitespace-nowrap text-sm text-white"
@@ -84,7 +74,7 @@ export default function StickyDownloadBar({ onDownloadClick }: StickyDownloadBar
             }}
           >
             {config.download.android.buttonText}
-          </motion.button>
+          </motion.a>
         </div>
       </div>
     </motion.div>
