@@ -96,10 +96,20 @@ export default function Footer() {
                 <div className="w-2 h-2 rounded-full" style={{ background: '#3f3f46' }} />
                 <span className="text-sm" style={{ color: '#3f3f46' }}>iOS — Coming soon</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <div className="w-2 h-2 rounded-full" style={{ background: '#3f3f46' }} />
-                <span className="text-sm" style={{ color: '#3f3f46' }}>Web — In progress</span>
-              </div>
+              <a
+                href={config.download.web.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 group"
+              >
+                <motion.div
+                  animate={{ opacity: [1, 0.4, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
+                  className="w-2 h-2 rounded-full"
+                  style={{ background: '#6366f1', boxShadow: '0 0 6px rgba(99,102,241,0.8)' }}
+                />
+                <span className="text-sm transition-colors duration-150 group-hover:text-indigo-400" style={{ color: '#a1a1aa' }}>Web — Live now ↗</span>
+              </a>
             </div>
           </motion.div>
         </div>
