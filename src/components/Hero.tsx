@@ -138,8 +138,10 @@ export default function Hero({ onDownloadClick, onScrollClick }: HeroProps) {
                 {config.hero.primaryCta}
               </motion.button>
 
-              <motion.button
-                onClick={onScrollClick}
+              <motion.a
+                href={config.download.web.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center justify-center gap-2 font-semibold py-4 px-8 rounded-2xl text-base transition-colors"
@@ -149,11 +151,11 @@ export default function Hero({ onDownloadClick, onScrollClick }: HeroProps) {
                   background: 'rgba(255,255,255,0.02)',
                 }}
               >
-                {config.hero.secondaryCta}
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
-              </motion.button>
+                {config.download.web.label}
+              </motion.a>
             </motion.div>
 
             {/* Stats row */}

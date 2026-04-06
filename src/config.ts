@@ -15,13 +15,18 @@ export const config = {
     android: {
       label: 'Available Now on Android',
       buttonText: 'Download APK',
-      url: process.env.NEXT_PUBLIC_APK_DOWNLOAD_URL || '',
+      url: process.env.NEXT_PUBLIC_APK_DOWNLOAD_URL || 'https://github.com/AditRaj-dev/CrewConnect/releases/download/v1.0.5/CrewConnect.v1.0.5.apk',
       minVersion: process.env.NEXT_PUBLIC_MIN_ANDROID_VERSION || '8.0',
       fileSize: '45 MB',
     },
     ios: {
       label: 'Coming Soon on iOS',
       buttonText: 'Notify Me',
+    },
+    web: {
+      label: 'Try in Browser',
+      buttonText: 'Open Web App',
+      url: process.env.NEXT_PUBLIC_WEB_APP_URL || 'https://crew-connect-rosy.vercel.app/',
     },
   },
   footer: {

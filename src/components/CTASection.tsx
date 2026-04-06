@@ -101,6 +101,25 @@ export default function CTASection({ onDownloadClick }: CTASectionProps) {
                 </svg>
                 Download for Android
               </motion.button>
+
+              <motion.a
+                href={config.download.web.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.04, y: -3 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center justify-center gap-3 font-semibold py-4 px-10 rounded-2xl text-base"
+                style={{
+                  border: '1px solid #27272a',
+                  color: '#a1a1aa',
+                  background: 'rgba(255,255,255,0.02)',
+                }}
+              >
+                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+                {config.download.web.buttonText}
+              </motion.a>
             </motion.div>
 
             {/* Social proof dots */}
